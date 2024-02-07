@@ -14,8 +14,11 @@ namespace WindowsFormsApp1
         [STAThread]
         static void Main()
         {
+            // Habilita estilos visuais para o aplicativo
             Application.EnableVisualStyles();
+            // Define o comportamento padrão de renderização de texto compatível com versões anteriores do Windows
             Application.SetCompatibleTextRenderingDefault(false);
+            // Inicia o aplicativo e mostra o formulário principal (PlugNotas)
             Application.Run(new PlugNotas());
         }
     }

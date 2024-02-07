@@ -3,16 +3,18 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text;
+using System.IO;
 
 namespace WindowsFormsApp1
 {
     public partial class Form2 : Form
     {
+        private readonly string authToken;
 
-        public Form2()
+        public Form2(string authToken)
         {
             InitializeComponent();
-
+            this.authToken = authToken;
         }
 
         private async void ButtonConsultar_Click(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace WindowsFormsApp1
         {
             // URL da API e chave de autenticação
             string apiUrl = $"https://api.sandbox.plugnotas.com.br/nfe/{idNota}/resumo";
-            string authToken = "2da392a6-79d2-4304-a8b7-959572c7e44d";
+            string authToken = this.authToken; 
 
             // Instância de HttpClient
             using (HttpClient httpClient = new HttpClient())
@@ -136,6 +138,8 @@ namespace WindowsFormsApp1
             using (var form = new Form())
             {
                 form.Text = "Informe a Justificativa";
+                form.Width = 500;
+                form.Height = 200; 
                 var label = new Label() { Left = 50, Top = 20, Text = "Justificativa:" };
                 var textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
                 var button = new Button() { Text = "Confirmar", Left = 350, Width = 100, Top = 100, DialogResult = DialogResult.OK };
@@ -154,7 +158,7 @@ namespace WindowsFormsApp1
         {
             // URL da API e chave de autenticação
             string apiUrl = $"https://api.sandbox.plugnotas.com.br/nfe/{idNota}/cancelamento";
-            string authToken = "2da392a6-79d2-4304-a8b7-959572c7e44d";
+            string authToken = this.authToken;
 
             // Instância de HttpClient
             using (HttpClient httpClient = new HttpClient())
@@ -209,7 +213,7 @@ namespace WindowsFormsApp1
         {
             // URL da API e chave de autenticação
             string apiUrl = $"https://api.sandbox.plugnotas.com.br/nfe/{idNota}/cancelamento/status";
-            string authToken = "2da392a6-79d2-4304-a8b7-959572c7e44d";
+            string authToken = this.authToken;
 
             // Instância de HttpClient
             using (HttpClient httpClient = new HttpClient())
@@ -257,9 +261,219 @@ namespace WindowsFormsApp1
         // Método para solicitar correção na nota fiscal
         private async Task SolicitarCorrecaoNota(string idNota)
         {
-            // Implemente a lógica para solicitar correção na nota fiscal aqui
-            MessageBox.Show("Método para solicitar correção na nota fiscal ainda não implementado.", "Aviso");
+            // Solicita a correção da nota fiscal ao usuário
+            string correcao = PedirCorrecao();
+
+            // Verifica se o usuário forneceu uma correção
+            if (!string.IsNullOrEmpty(correcao))
+            {
+                try
+                {
+                    // URL da API para solicitar correção na nota fiscal
+                    string apiUrl = $"https://api.sandbox.plugnotas.com.br/nfe/{idNota}/cce";
+                    string authToken = this.authToken;
+
+                    // Instância de HttpClient
+                    using (HttpClient httpClient = new HttpClient())
+                    {
+                        // Adiciona a chave de autenticação no header da requisição
+                        httpClient.DefaultRequestHeaders.Add("X-API-KEY", authToken);
+
+                        // Monta o payload de correção
+                        var correcaoPayload = new { correcao = correcao };
+                        var jsonPayload = Newtonsoft.Json.JsonConvert.SerializeObject(correcaoPayload);
+                        var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+                        // Envia a requisição POST para a API para solicitar correção na nota fiscal
+                        HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Correção da nota fiscal solicitada com sucesso.", "Sucesso");
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Erro ao solicitar correção da nota fiscal: {response.StatusCode} - {response.ReasonPhrase}", "Erro");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro ao solicitar correção da nota fiscal: {ex.Message}", "Erro");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, forneça a correção para a nota fiscal.", "Aviso");
+            }
         }
 
+
+        // Método para solicitar a correção ao usuário
+        private string PedirCorrecao()
+        {
+            using (var form = new Form())
+            {
+                form.Text = "Informe a Correção";
+                form.Width = 500;
+                form.Height = 200;
+                var label = new Label() { Left = 50, Top = 20, Text = "Correção:" };
+                var textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
+                var button = new Button() { Text = "Confirmar", Left = 350, Width = 100, Top = 100, DialogResult = DialogResult.OK };
+                button.Click += (sender, e) => { form.Close(); };
+                form.Controls.Add(textBox);
+                form.Controls.Add(label);
+                form.Controls.Add(button);
+                form.AcceptButton = button;
+
+                return form.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+            }
+        }
+        private async void uploadbutton_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "Arquivos JSON (*.json)|*.json";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string apiUrl = "https://api.sandbox.plugnotas.com.br/nfe";
+
+                        // Leitura do conteúdo do arquivo selecionado
+                        string jsonContent = File.ReadAllText(openFileDialog.FileName);
+
+                        // Exibe mensagem de confirmação
+                        DialogResult result = MessageBox.Show("Deseja enviar o arquivo JSON para a API?", "Confirmação", MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                        {
+                            // Envio do conteúdo para a API
+                            using (HttpClient httpClient = new HttpClient())
+                            {
+                                string authToken = this.authToken;
+                                httpClient.DefaultRequestHeaders.Add("X-API-KEY", authToken);
+
+                                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                                HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
+
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    string responseBody = await response.Content.ReadAsStringAsync();
+                                    MessageBox.Show($"Resposta da API:\n{responseBody}", "Sucesso");
+                                }
+                                else
+                                {
+                                    MessageBox.Show($"Erro ao enviar arquivo JSON para a API: {response.StatusCode} - {response.ReasonPhrase}", "Erro");
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erro ao enviar arquivo JSON para a API: {ex.Message}", "Erro");
+                    }
+                }
+            }
+        }
+        private async void emitirbutton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string apiUrl = "https://api.sandbox.plugnotas.com.br/nfe";
+
+                // Obtém o conteúdo da textBox2
+                string jsonContent = textBox2.Text;
+
+                // Exibe mensagem de confirmação
+                DialogResult result = MessageBox.Show("Deseja enviar o conteúdo para a API?", "Confirmação", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    await EnviarConteudoParaAPI(apiUrl, jsonContent);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao enviar conteúdo para a API: {ex.Message}", "Erro");
+            }
+        }
+
+        private async Task EnviarConteudoParaAPI(string apiUrl, string jsonContent)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                string authToken = this.authToken;
+                httpClient.DefaultRequestHeaders.Add("X-API-KEY", authToken);
+
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show($"Resposta da API:\n{responseBody}", "Sucesso");
+                }
+                else
+                {
+                    MessageBox.Show($"Erro ao enviar conteúdo para a API: {response.StatusCode} - {response.ReasonPhrase}", "Erro");
+                }
+            }
+        }
+
+        private async void consultarPorPeriodoButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string cpfCnpj = textBox1.Text; // Obtém o CPF/CNPJ digitado na textBox1
+                string dataInicial = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+                string dataFinal = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+
+                string apiUrl = $"https://api.sandbox.plugnotas.com.br/nfe/consulta/periodo?cpfCnpj={cpfCnpj}&dataInicial={dataInicial}&dataFinal={dataFinal}";
+
+                string authToken = this.authToken;
+
+                await ConsultarNotasPorPeriodo(apiUrl, authToken);
+
+                MessageBox.Show("Consulta de notas por período concluída com sucesso.", "Sucesso");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao consultar notas por período: {ex.Message}", "Erro");
+            }
+        }
+
+        private async Task ConsultarNotasPorPeriodo(string apiUrl, string authToken)
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Add("X-API-KEY", authToken);
+
+                    try
+                    {
+                        HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string responseBody = await response.Content.ReadAsStringAsync();
+                            MessageBox.Show(JsonBeautify(responseBody), "Resposta da API");
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Erro na requisição: {response.StatusCode} - {response.ReasonPhrase}", "Erro");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erro na requisição: {ex.Message}", "Erro");
+                    }
+                }
+            }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -35,13 +35,13 @@ namespace WindowsFormsApp1
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textbox2 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(49, 43);
+            this.button1.Location = new System.Drawing.Point(49, 63);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(167, 74);
             this.button1.TabIndex = 0;
@@ -51,7 +51,7 @@ namespace WindowsFormsApp1
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(251, 43);
+            this.button2.Location = new System.Drawing.Point(251, 63);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(167, 74);
             this.button2.TabIndex = 1;
@@ -61,7 +61,7 @@ namespace WindowsFormsApp1
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(49, 147);
+            this.button3.Location = new System.Drawing.Point(49, 167);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(167, 74);
             this.button3.TabIndex = 2;
@@ -98,30 +98,30 @@ namespace WindowsFormsApp1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(162, 14);
+            this.label1.Location = new System.Drawing.Point(12, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Header";
+            this.label1.Text = "x-api-key";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // textbox2
             // 
-            this.textBox1.Location = new System.Drawing.Point(210, 9);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(208, 20);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.Text = "x-api-key";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.textbox2.Location = new System.Drawing.Point(66, 37);
+            this.textbox2.Name = "textbox2";
+            this.textbox2.Size = new System.Drawing.Size(208, 20);
+            this.textbox2.TabIndex = 7;
+            this.textbox2.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
-            // textBox2
+            // button4
             // 
-            this.textBox2.Location = new System.Drawing.Point(210, 9);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(208, 20);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.Text = "x-api-key";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.button4.Location = new System.Drawing.Point(280, 37);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(44, 20);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "definir";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // PlugNotas
             // 
@@ -130,8 +130,8 @@ namespace WindowsFormsApp1
             this.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.Frame_8;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(464, 261);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.textbox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
@@ -154,8 +154,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.TextBox textbox2;
+        private System.Windows.Forms.Button button4;
     }
 }
 

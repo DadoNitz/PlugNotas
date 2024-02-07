@@ -44,20 +44,36 @@ namespace WindowsFormsApp1
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            // Cria uma instância do Form2
-            Form2 form2 = new Form2();
+            // Verifica se o token de autenticação foi definido
+            if (!string.IsNullOrEmpty(this.ApiKey))
+            {
+                // Cria uma instância do Form2 passando o token de autenticação
+                Form2 form2 = new Form2(this.ApiKey);
 
-            // Exibe o Form2
-            form2.Show();
+                // Exibe o Form2
+                form2.Show();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, defina o token de autenticação antes de prosseguir.", "Aviso");
+            }
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            // Cria uma instância do Form2
-            Form3 form3 = new Form3();
+            // Verifica se o token de autenticação foi definido
+            if (!string.IsNullOrEmpty(this.ApiKey))
+            {
+                // Cria uma instância do Form2 passando o token de autenticação
+                Form3 form3 = new Form3(this.ApiKey);
 
-            // Exibe o Form2
-            form3.Show();
+                // Exibe o Form2
+                form3.Show();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, defina o token de autenticação antes de prosseguir.", "Aviso");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -93,5 +109,19 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // Obtém o token de autenticação do textBox2
+            string authToken = textbox2.Text;
+
+            // Armazena o token de autenticação em uma propriedade de Form1
+            this.ApiKey = authToken;
+
+            // Exibe uma mensagem de confirmação
+            MessageBox.Show("Token de autenticação definido com sucesso.", "Sucesso");
+        }
+
+        public string ApiKey { get; private set; }
     }
 }

@@ -43,6 +43,9 @@ namespace WindowsFormsApp1
             this.label4 = new System.Windows.Forms.Label();
             this.consultarcancelamentobutton = new System.Windows.Forms.Button();
             this.solicitarcorrecaobutton = new System.Windows.Forms.Button();
+            this.consultarPorPeriodoButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -85,12 +88,13 @@ namespace WindowsFormsApp1
             // 
             // emitirbutton
             // 
-            this.emitirbutton.Location = new System.Drawing.Point(238, 408);
+            this.emitirbutton.Location = new System.Drawing.Point(15, 408);
             this.emitirbutton.Name = "emitirbutton";
             this.emitirbutton.Size = new System.Drawing.Size(77, 23);
             this.emitirbutton.TabIndex = 4;
             this.emitirbutton.Text = "Emitir";
             this.emitirbutton.UseVisualStyleBackColor = true;
+            this.emitirbutton.Click += new System.EventHandler(this.emitirbutton_Click);
             // 
             // label2
             // 
@@ -112,32 +116,32 @@ namespace WindowsFormsApp1
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(335, 110);
+            this.label3.Location = new System.Drawing.Point(335, 119);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 13);
+            this.label3.Size = new System.Drawing.Size(99, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Consultar por periodo";
+            this.label3.Text = "Digite o cpf ou cnpj";
             // 
             // uploadbutton
             // 
-            this.uploadbutton.Location = new System.Drawing.Point(15, 408);
+            this.uploadbutton.Location = new System.Drawing.Point(254, 408);
             this.uploadbutton.Name = "uploadbutton";
-            this.uploadbutton.Size = new System.Drawing.Size(55, 23);
+            this.uploadbutton.Size = new System.Drawing.Size(61, 23);
             this.uploadbutton.TabIndex = 8;
             this.uploadbutton.Text = "upload";
             this.uploadbutton.UseVisualStyleBackColor = true;
-            this.uploadbutton.Click += new System.EventHandler(this.button4_Click);
+            this.uploadbutton.Click += new System.EventHandler(this.uploadbutton_Click);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(338, 135);
+            this.dateTimePicker1.Location = new System.Drawing.Point(338, 174);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 9;
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(338, 174);
+            this.dateTimePicker2.Location = new System.Drawing.Point(338, 213);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 10;
@@ -145,7 +149,7 @@ namespace WindowsFormsApp1
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(431, 158);
+            this.label4.Location = new System.Drawing.Point(432, 197);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(22, 13);
             this.label4.TabIndex = 11;
@@ -167,9 +171,36 @@ namespace WindowsFormsApp1
             this.solicitarcorrecaobutton.Name = "solicitarcorrecaobutton";
             this.solicitarcorrecaobutton.Size = new System.Drawing.Size(305, 23);
             this.solicitarcorrecaobutton.TabIndex = 13;
-            this.solicitarcorrecaobutton.Text = "Solicitar correção"; 
+            this.solicitarcorrecaobutton.Text = "Solicitar correção";
             this.solicitarcorrecaobutton.UseVisualStyleBackColor = true;
             this.solicitarcorrecaobutton.Click += new System.EventHandler(this.solicitarcorrecaobutton_Click);
+            // 
+            // consultarPorPeriodoButton
+            // 
+            this.consultarPorPeriodoButton.Location = new System.Drawing.Point(338, 240);
+            this.consultarPorPeriodoButton.Name = "consultarPorPeriodoButton";
+            this.consultarPorPeriodoButton.Size = new System.Drawing.Size(75, 23);
+            this.consultarPorPeriodoButton.TabIndex = 14;
+            this.consultarPorPeriodoButton.Text = "Consultar";
+            this.consultarPorPeriodoButton.UseVisualStyleBackColor = true;
+            this.consultarPorPeriodoButton.Click += new System.EventHandler(this.consultarPorPeriodoButton_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(338, 135);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(200, 20);
+            this.textBox1.TabIndex = 15;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(335, 158);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(103, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Selecione o período";
             // 
             // Form2
             // 
@@ -178,6 +209,9 @@ namespace WindowsFormsApp1
             this.BackColor = System.Drawing.Color.Silver;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(634, 465);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.consultarPorPeriodoButton);
             this.Controls.Add(this.solicitarcorrecaobutton);
             this.Controls.Add(this.consultarcancelamentobutton);
             this.Controls.Add(this.label4);
@@ -216,5 +250,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button consultarcancelamentobutton;
         private System.Windows.Forms.Button solicitarcorrecaobutton;
+        private System.Windows.Forms.Button consultarPorPeriodoButton;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -12,12 +12,20 @@ namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        private readonly string authToken;
+
+        public Form3(string authToken)
         {
             InitializeComponent();
+            this.authToken = authToken;
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
