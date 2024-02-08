@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text;
-using System.IO;
 
 namespace WindowsFormsApp1
 {
@@ -42,7 +41,7 @@ namespace WindowsFormsApp1
         {
             // URL da API e chave de autenticação
             string apiUrl = $"https://api.sandbox.plugnotas.com.br/nfe/{idNota}/resumo";
-            string authToken = this.authToken; 
+            string authToken = this.authToken;
 
             // Instância de HttpClient
             using (HttpClient httpClient = new HttpClient())
@@ -142,7 +141,7 @@ namespace WindowsFormsApp1
             {
                 form.Text = "Informe a Justificativa";
                 form.Width = 500;
-                form.Height = 200; 
+                form.Height = 200;
                 var label = new Label() { Left = 50, Top = 20, Text = "Justificativa:" };
                 var textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
                 var button = new Button() { Text = "Confirmar", Left = 350, Width = 100, Top = 100, DialogResult = DialogResult.OK };
@@ -420,29 +419,29 @@ namespace WindowsFormsApp1
         }
 
         private async Task ConsultarNotasPorPeriodo(string apiUrl, string authToken)
+        {
+            using (HttpClient httpClient = new HttpClient())
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.DefaultRequestHeaders.Add("X-API-KEY", authToken);
+                httpClient.DefaultRequestHeaders.Add("X-API-KEY", authToken);
 
-                    try
+                try
+                {
+                    HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+                    if (response.IsSuccessStatusCode)
                     {
-                        HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            string responseBody = await response.Content.ReadAsStringAsync();
-                            ShowResponseMessageBox(responseBody);
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Erro na requisição: {response.StatusCode} - {response.ReasonPhrase}", "Erro");
-                        }
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        ShowResponseMessageBox(responseBody);
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show($"Erro na requisição: {ex.Message}", "Erro");
+                        MessageBox.Show($"Erro na requisição: {response.StatusCode} - {response.ReasonPhrase}", "Erro");
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro na requisição: {ex.Message}", "Erro");
+                }
+            }
         }
         private void ShowResponseMessageBox(string response)
         {
