@@ -51,7 +51,7 @@ namespace WindowsFormsApp1
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Upload";
+            this.button1.Text = "Upload file";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -66,6 +66,7 @@ namespace WindowsFormsApp1
             this.textBox1.Size = new System.Drawing.Size(208, 20);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "id do certificado";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button2
             // 

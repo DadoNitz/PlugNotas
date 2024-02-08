@@ -78,11 +78,18 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // Cria uma instância do Form2
-            Form4 form4 = new Form4();
+            if (!string.IsNullOrEmpty(this.ApiKey))
+            {
+                // Cria uma instância do Form2 passando o token de autenticação
+                Form4 form4 = new Form4(this.ApiKey);
 
-            // Exibe o Form2
-            form4.Show();
+                // Exibe o Form2
+                form4.Show();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, defina o token de autenticação antes de prosseguir.", "Aviso");
+            }
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
@@ -113,7 +120,7 @@ namespace WindowsFormsApp1
         private void button4_Click(object sender, EventArgs e)
         {
             // Obtém o token de autenticação do textBox2
-            string authToken = textbox2.Text;
+            string authToken = textboxkey.Text;
 
             // Armazena o token de autenticação em uma propriedade de Form1
             this.ApiKey = authToken;
@@ -123,5 +130,19 @@ namespace WindowsFormsApp1
         }
 
         public string ApiKey { get; private set; }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonSandbox.Checked) // Se o RadioButton de sandbox estiver marcado
+            {
+                textboxkey.Enabled = false; // Desabilita a TextBox para entrada de texto
+                textboxkey.Text = "2da392a6-79d2-4304-a8b7-959572c7e44d"; // Preenche a TextBox com o valor padrão
+            }
+            else
+            {
+                textboxkey.Enabled = true; // Habilita a TextBox para entrada de texto
+                textboxkey.Text = ""; // Limpa o texto da TextBox
+            }
+        }
     }
 }

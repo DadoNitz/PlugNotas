@@ -15,6 +15,9 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             this.authToken = authToken;
+
+            textBoxNota.Multiline = true;
+            textBoxNota.ScrollBars = ScrollBars.Vertical;
         }
 
         private async void ButtonConsultar_Click(object sender, EventArgs e)
@@ -331,51 +334,22 @@ namespace WindowsFormsApp1
         }
         private async void uploadbutton_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Arquivos JSON (*.json)|*.json|Todos os arquivos (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "Arquivos JSON (*.json)|*.json";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    try
-                    {
-                        string apiUrl = "https://api.sandbox.plugnotas.com.br/nfe";
-
-                        // Leitura do conteúdo do arquivo selecionado
-                        string jsonContent = File.ReadAllText(openFileDialog.FileName);
-
-                        // Exibe mensagem de confirmação
-                        DialogResult result = MessageBox.Show("Deseja enviar o arquivo JSON para a API?", "Confirmação", MessageBoxButtons.YesNo);
-                        if (result == DialogResult.Yes)
-                        {
-                            // Envio do conteúdo para a API
-                            using (HttpClient httpClient = new HttpClient())
-                            {
-                                string authToken = this.authToken;
-                                httpClient.DefaultRequestHeaders.Add("X-API-KEY", authToken);
-
-                                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                                HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
-
-                                if (response.IsSuccessStatusCode)
-                                {
-                                    string responseBody = await response.Content.ReadAsStringAsync();
-                                    MessageBox.Show($"Resposta da API:\n{responseBody}", "Sucesso");
-                                }
-                                else
-                                {
-                                    MessageBox.Show($"Erro ao enviar arquivo JSON para a API: {response.StatusCode} - {response.ReasonPhrase}", "Erro");
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Erro ao enviar arquivo JSON para a API: {ex.Message}", "Erro");
-                    }
+                    string filePath = openFileDialog.FileName;
+                    string fileContent = System.IO.File.ReadAllText(filePath);
+                    textBox2.Text = fileContent; // Exibe o conteúdo do arquivo no textBox2
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro ao abrir o arquivo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

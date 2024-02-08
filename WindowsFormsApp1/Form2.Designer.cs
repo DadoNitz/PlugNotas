@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace WindowsFormsApp1
 {
     partial class Form2
@@ -88,9 +90,9 @@ namespace WindowsFormsApp1
             // 
             // emitirbutton
             // 
-            this.emitirbutton.Location = new System.Drawing.Point(15, 408);
+            this.emitirbutton.Location = new System.Drawing.Point(244, 408);
             this.emitirbutton.Name = "emitirbutton";
-            this.emitirbutton.Size = new System.Drawing.Size(77, 23);
+            this.emitirbutton.Size = new System.Drawing.Size(71, 23);
             this.emitirbutton.TabIndex = 4;
             this.emitirbutton.Text = "Emitir";
             this.emitirbutton.UseVisualStyleBackColor = true;
@@ -110,8 +112,10 @@ namespace WindowsFormsApp1
             this.textBox2.Location = new System.Drawing.Point(15, 135);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
+            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox2.Size = new System.Drawing.Size(300, 267);
             this.textBox2.TabIndex = 6;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label3
             // 
@@ -124,11 +128,11 @@ namespace WindowsFormsApp1
             // 
             // uploadbutton
             // 
-            this.uploadbutton.Location = new System.Drawing.Point(254, 408);
+            this.uploadbutton.Location = new System.Drawing.Point(15, 408);
             this.uploadbutton.Name = "uploadbutton";
-            this.uploadbutton.Size = new System.Drawing.Size(61, 23);
+            this.uploadbutton.Size = new System.Drawing.Size(69, 23);
             this.uploadbutton.TabIndex = 8;
-            this.uploadbutton.Text = "upload";
+            this.uploadbutton.Text = "upload json";
             this.uploadbutton.UseVisualStyleBackColor = true;
             this.uploadbutton.Click += new System.EventHandler(this.uploadbutton_Click);
             // 
@@ -208,7 +212,7 @@ namespace WindowsFormsApp1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(634, 465);
+            this.ClientSize = new System.Drawing.Size(634, 461);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.consultarPorPeriodoButton);
@@ -232,6 +236,11 @@ namespace WindowsFormsApp1
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

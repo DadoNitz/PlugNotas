@@ -32,10 +32,10 @@ namespace WindowsFormsApp1
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButtonSandbox = new System.Windows.Forms.RadioButton();
+            this.radioButtonProd = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.textbox2 = new System.Windows.Forms.TextBox();
+            this.textboxkey = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -69,30 +69,31 @@ namespace WindowsFormsApp1
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // radioButton1
+            // radioButtonSandbox
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton1.Location = new System.Drawing.Point(12, 12);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(67, 17);
-            this.radioButton1.TabIndex = 4;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Sandbox";
-            this.radioButton1.UseVisualStyleBackColor = false;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.radioButtonSandbox.AutoSize = true;
+            this.radioButtonSandbox.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonSandbox.Location = new System.Drawing.Point(12, 12);
+            this.radioButtonSandbox.Name = "radioButtonSandbox";
+            this.radioButtonSandbox.Size = new System.Drawing.Size(67, 17);
+            this.radioButtonSandbox.TabIndex = 4;
+            this.radioButtonSandbox.TabStop = true;
+            this.radioButtonSandbox.Text = "Sandbox";
+            this.radioButtonSandbox.UseVisualStyleBackColor = false;
+            this.radioButtonSandbox.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // radioButton2
+            // radioButtonProd
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton2.Location = new System.Drawing.Point(85, 12);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(71, 17);
-            this.radioButton2.TabIndex = 5;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Produção";
-            this.radioButton2.UseVisualStyleBackColor = false;
+            this.radioButtonProd.AutoSize = true;
+            this.radioButtonProd.BackColor = System.Drawing.Color.Transparent;
+            this.radioButtonProd.Location = new System.Drawing.Point(85, 12);
+            this.radioButtonProd.Name = "radioButtonProd";
+            this.radioButtonProd.Size = new System.Drawing.Size(71, 17);
+            this.radioButtonProd.TabIndex = 5;
+            this.radioButtonProd.TabStop = true;
+            this.radioButtonProd.Text = "Produção";
+            this.radioButtonProd.UseVisualStyleBackColor = false;
+            this.radioButtonProd.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // label1
             // 
@@ -105,13 +106,13 @@ namespace WindowsFormsApp1
             this.label1.Text = "x-api-key";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textbox2
+            // textboxkey
             // 
-            this.textbox2.Location = new System.Drawing.Point(66, 37);
-            this.textbox2.Name = "textbox2";
-            this.textbox2.Size = new System.Drawing.Size(208, 20);
-            this.textbox2.TabIndex = 7;
-            this.textbox2.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.textboxkey.Location = new System.Drawing.Point(66, 37);
+            this.textboxkey.Name = "textboxkey";
+            this.textboxkey.Size = new System.Drawing.Size(208, 20);
+            this.textboxkey.TabIndex = 7;
+            this.textboxkey.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // button4
             // 
@@ -131,10 +132,10 @@ namespace WindowsFormsApp1
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(464, 261);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.textbox2);
+            this.Controls.Add(this.textboxkey);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.radioButtonProd);
+            this.Controls.Add(this.radioButtonSandbox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -151,10 +152,10 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButtonSandbox;
+        private System.Windows.Forms.RadioButton radioButtonProd;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.TextBox textbox2;
+        public System.Windows.Forms.TextBox textboxkey;
         private System.Windows.Forms.Button button4;
     }
 }
