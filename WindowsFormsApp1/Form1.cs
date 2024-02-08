@@ -133,16 +133,7 @@ namespace WindowsFormsApp1
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButtonSandbox.Checked) // Se o RadioButton de sandbox estiver marcado
-            {
-                textboxkey.Enabled = false; // Desabilita a TextBox para entrada de texto
-                textboxkey.Text = "2da392a6-79d2-4304-a8b7-959572c7e44d"; // Preenche a TextBox com o valor padrão
-            }
-            else
-            {
-                textboxkey.Enabled = true; // Habilita a TextBox para entrada de texto
-                textboxkey.Text = ""; // Limpa o texto da TextBox
-            }
+         
         }
     }
 }

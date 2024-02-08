@@ -58,7 +58,7 @@ namespace WindowsFormsApp1
                     {
                         // Se a requisição for bem-sucedida, lê o corpo da resposta
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show(JsonBeautify(responseBody), "Resposta da API");
+                        ShowResponseMessageBox(responseBody);
                     }
                     else
                     {
@@ -231,7 +231,7 @@ namespace WindowsFormsApp1
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show(JsonBeautify(responseBody), "Resposta da API");
+                        ShowResponseMessageBox(responseBody);
                     }
                     else
                     {
@@ -388,7 +388,7 @@ namespace WindowsFormsApp1
                 if (response.IsSuccessStatusCode)
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show($"Resposta da API:\n{responseBody}", "Sucesso");
+                    ShowResponseMessageBox(responseBody);
                 }
                 else
                 {
@@ -431,7 +431,7 @@ namespace WindowsFormsApp1
                         if (response.IsSuccessStatusCode)
                         {
                             string responseBody = await response.Content.ReadAsStringAsync();
-                            MessageBox.Show(JsonBeautify(responseBody), "Resposta da API");
+                            ShowResponseMessageBox(responseBody);
                         }
                         else
                         {
@@ -443,7 +443,27 @@ namespace WindowsFormsApp1
                         MessageBox.Show($"Erro na requisição: {ex.Message}", "Erro");
                     }
                 }
-            }
+        }
+        private void ShowResponseMessageBox(string response)
+        {
+            // Crie um novo formulário para exibir a resposta da API
+            Form responseForm = new Form();
+            responseForm.Text = "Resposta da API";
+            responseForm.Size = new System.Drawing.Size(400, 300);
+
+            // Adicione um controle TextBox para exibir a resposta
+            TextBox textBox = new TextBox();
+            textBox.Multiline = true;
+            textBox.ScrollBars = ScrollBars.Vertical;
+            textBox.Dock = DockStyle.Fill;
+            textBox.Text = response;
+
+            // Adicione o TextBox ao formulário
+            responseForm.Controls.Add(textBox);
+
+            // Mostre o formulário
+            responseForm.ShowDialog();
+        }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {

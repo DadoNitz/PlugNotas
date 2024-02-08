@@ -39,6 +39,9 @@ namespace WindowsFormsApp1
                     // Envia o certificado para a API
                     using (HttpClient httpClient = new HttpClient())
                     {
+                        // Configura o cabeçalho x-api-key
+                        httpClient.DefaultRequestHeaders.Add("x-api-key", authToken);
+
                         MultipartFormDataContent form = new MultipartFormDataContent();
                         ByteArrayContent fileContent = new ByteArrayContent(certificadoBytes);
                         form.Add(fileContent, "file", Path.GetFileName(caminhoArquivo));
@@ -63,6 +66,11 @@ namespace WindowsFormsApp1
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
         {
 
         }
