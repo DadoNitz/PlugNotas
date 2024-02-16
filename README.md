@@ -33,7 +33,7 @@ Este projeto é uma aplicação de exemplo que demonstra como consumir uma API u
 
 ## Recursos
 
-- [Documentação da API]([link_para_documentação_da_api](https://docs.plugnotas.com.br)) - Link para a documentação da API utilizada neste projeto.
+- [Documentação da API](https://docs.plugnotas.com.br) - Link para a documentação da API utilizada neste projeto.
 - [Visual Studio](https://visualstudio.microsoft.com/) - IDE utilizada para desenvolver o projeto.
 - [.NET](https://dotnet.microsoft.com/) - Plataforma de desenvolvimento utilizada.
 - [Windows Forms](https://docs.microsoft.com/en-us/dotnet/desktop/winforms/?view=netdesktop-6.0) - Plataforma utilizada para construir a interface do usuário.
